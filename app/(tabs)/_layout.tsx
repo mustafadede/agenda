@@ -21,7 +21,7 @@ export default function TabsLayout() {
           <View style={{ flex: 1, height: "100%" }}>
             <DrawerContentScrollView {...props}>
               <ImageBackground
-                source={require("@/assets/images/agenda-logo.png")}
+                source={require("@/assets/images/pocket-logo.png")}
                 style={{
                   alignItems: "flex-start",
                   padding: 20,
@@ -50,7 +50,7 @@ export default function TabsLayout() {
           },
           headerTitle: () => (
             <Image
-              source={require("@/assets/images/agenda-logo.png")}
+              source={require("@/assets/images/pocket-logo.png")}
               style={{ width: 120, height: 40, resizeMode: "contain" }}
             />
           ),
