@@ -176,8 +176,9 @@ export default function HomeScreen() {
               onPress={() => {
                 if (today === selectedDate) {
                   router.push("/createday");
+                } else {
+                  router.push("/viewday");
                 }
-                router.push("/viewday");
               }}
             >
               <Text
