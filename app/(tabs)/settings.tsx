@@ -1,12 +1,138 @@
-import React from "react";
-import { Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import {
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 
-const settings = () => {
+export default function SettingsScreen() {
+  const [notifications, setNotifications] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const colorScheme = useColorScheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 20,
+      gap: 20,
+    },
+
+    sectionTitle: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: colorScheme === "dark" ? "#FFFFFF" : "#1A1A1A",
+      marginBottom: -5,
+    },
+
+    card: {
+      backgroundColor: colorScheme === "dark" ? "#1A1A1A" : "#FFFFFF",
+      borderRadius: 16,
+      paddingHorizontal: 18,
+      paddingVertical: 10,
+      shadowColor: "#000",
+      shadowOpacity: 0.05,
+      shadowRadius: 4,
+      elevation: 1,
+    },
+
+    row: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingVertical: 16,
+    },
+
+    left: {
+      flexDirection: "row",
+      gap: 12,
+      alignItems: "center",
+    },
+
+    label: {
+      fontSize: 14,
+      color: colorScheme === "dark" ? "#FFFFFF" : "#1A1A1A",
+      fontWeight: "500",
+    },
+  });
+
   return (
-    <View>
-      <Text>settings</Text>
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Genel</Text>
+      <View style={styles.card}>
+        <View style={styles.row}>
+          <View style={styles.left}>
+            <Ionicons name="notifications-outline" size={22} color="#ff6e00" />
+            <Text style={styles.label}>Bildirimler</Text>
+          </View>
+          <Switch
+            value={notifications}
+            onValueChange={setNotifications}
+            thumbColor={notifications ? "#ff6e00" : "#ccc"}
+            trackColor={{ true: "#ffd7b3", false: "#ccc" }}
+          />
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.left}>
+            <Ionicons name="moon-outline" size={22} color="#ff6e00" />
+            <Text style={styles.label}>Karanlık Mod</Text>
+          </View>
+          <Switch
+            value={darkMode}
+            onValueChange={setDarkMode}
+            thumbColor={darkMode ? "#ff6e00" : "#ccc"}
+            trackColor={{ true: "#ffd7b3", false: "#ccc" }}
+          />
+        </View>
+      </View>
+
+      <Text style={styles.sectionTitle}>Hesap</Text>
+
+      <View style={styles.card}>
+        <TouchableOpacity style={styles.row}>
+          <View style={styles.left}>
+            <Ionicons name="person-outline" size={22} color="#ff6e00" />
+            <Text style={styles.label}>Profil Bilgileri</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color="#999" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.row}>
+          <View style={styles.left}>
+            <Ionicons name="lock-closed-outline" size={22} color="#ff6e00" />
+            <Text style={styles.label}>Şifre Değiştir</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color="#999" />
+        </TouchableOpacity>
+      </View>
+
+      <Text style={styles.sectionTitle}>Diğer</Text>
+
+      <View style={styles.card}>
+        <TouchableOpacity style={styles.row}>
+          <View style={styles.left}>
+            <Ionicons name="help-circle-outline" size={22} color="#ff6e00" />
+            <Text style={styles.label}>Yardım & Destek</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color="#999" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.row}>
+          <View style={styles.left}>
+            <Ionicons
+              name="information-circle-outline"
+              size={22}
+              color="#ff6e00"
+            />
+            <Text style={styles.label}>Hakkında</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color="#999" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
-};
-
-export default settings;
+}

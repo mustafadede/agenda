@@ -10,6 +10,13 @@ export default function TabsLayout() {
   return (
     <Drawer
       screenOptions={{
+        headerTintColor: "#ff6e00",
+        headerTitleAlign: "center",
+        drawerActiveTintColor: "#ff6e00",
+        headerStyle: {
+          backgroundColor: "transparent",
+          elevation: 0,
+        },
         drawerStyle: {
           borderRadius: 40,
           marginVertical: 0,
@@ -41,13 +48,7 @@ export default function TabsLayout() {
         options={{
           drawerLabel: "Ana Sayfa",
           title: "",
-          headerTitleAlign: "center",
-          headerTintColor: "#ff6e00",
-          drawerActiveTintColor: "#ff6e00",
-          headerStyle: {
-            backgroundColor: "transparent",
-            elevation: 0,
-          },
+
           headerTitle: () => (
             <Image
               source={require("@/assets/images/pocket-logo.png")}
@@ -59,7 +60,14 @@ export default function TabsLayout() {
       <Drawer.Screen
         name="settings"
         options={{
-          title: "Ayarlar",
+          title: "",
+          drawerLabel: "Ayarlar",
+          headerTitle: () => (
+            <Image
+              source={require("@/assets/images/pocket-logo.png")}
+              style={{ width: 120, height: 40, resizeMode: "contain" }}
+            />
+          ),
         }}
       />
     </Drawer>
