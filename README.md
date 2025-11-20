@@ -1,6 +1,8 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<img width="1226" height="603" alt="Frame 1" src="https://github.com/user-attachments/assets/ddb6f510-0203-4ee1-82f5-67cadadd1e51" />
+
+
+This is an Agenda/Planner local first mobile app. Currently work in progress.
 
 ## Get started
 
