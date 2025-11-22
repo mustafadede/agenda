@@ -1,7 +1,8 @@
+import { createNote, getNoteByDate } from "@/src/db/notes";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -27,6 +28,17 @@ const Createday = () => {
     { label: "Push up", done: false },
   ]);
 
+  const today = new Date().toISOString().split("T")[0];
+
+  useEffect(() => {
+    console.log(today);
+
+    getNoteByDate(today).then((data) => {
+      if (data) setInput(data.content);
+      console.log(data);
+    });
+  }, []);
+
   const toggleActivity = (index: number) => {
     setActivities((prev) =>
       prev.map((activity, i) =>
@@ -39,6 +51,7 @@ const Createday = () => {
     if (input.trim().length === 0) return;
     setTasks([...tasks, input]);
     setRatingStep(true);
+    createNote(today, input);
   };
 
   return (
@@ -47,6 +60,7 @@ const Createday = () => {
         flex: 1,
         backgroundColor: "transparent",
         paddingHorizontal: 20,
+        marginTop: Platform.OS === "ios" ? 20 : 0,
       }}
     >
       <KeyboardAvoidingView

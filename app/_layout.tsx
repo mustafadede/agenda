@@ -1,14 +1,21 @@
+import { initializeDatabase } from "@/src/db";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
+import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    initializeDatabase();
+  }, []);
+
   return (
     <KeyboardProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -18,9 +25,8 @@ export default function RootLayout() {
             name="createday"
             options={{
               title: "Gününü düzenle",
-              headerBlurEffect: "dark",
               headerStyle: {
-                backgroundColor: "black",
+                backgroundColor: colorScheme === "dark" ? "#121212" : "#FFFFFF",
               },
               presentation: "modal",
               animationMatchesGesture: true,

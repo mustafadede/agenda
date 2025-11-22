@@ -1,3 +1,5 @@
+import { dateFormatter } from "@/utils/dateFormatter";
+import { SimpleLineIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -59,7 +61,6 @@ export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const date = new Date().toLocaleDateString();
   const router = useRouter();
-  console.log(date, selectedDate?.replaceAll("-", "/"));
 
   return (
     <SafeAreaView
@@ -112,47 +113,20 @@ export default function HomeScreen() {
               agendaDayTextColor: "white",
               selectedDayTextColor: "#FFFFFF",
             }}
+            renderArrow={(direction) => (
+              <View>
+                {direction === "left" ? (
+                  <SimpleLineIcons name="arrow-left" size={14} color="white" />
+                ) : (
+                  <SimpleLineIcons name="arrow-right" size={14} color="white" />
+                )}
+              </View>
+            )}
             onDayPress={(day) => {
               setSelectedDate(day.dateString);
             }}
           />
         </Animated.View>
-
-        {selectedDate !== today && (
-          <Animated.View
-            entering={FadeIn.duration(500)}
-            style={{
-              borderRadius: 16,
-              shadowOffset: { width: 0, height: 2 },
-              elevation: 0,
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                alignSelf: "center",
-                paddingVertical: 8,
-                marginTop: 15,
-                paddingHorizontal: 16,
-                borderRadius: 10,
-                borderWidth: 1,
-                borderColor: "#ff6e00",
-              }}
-              onPress={() => {
-                setSelectedDate(today);
-              }}
-            >
-              <Text
-                style={{
-                  color: "#ff6e00",
-                  fontWeight: "500",
-                  fontSize: 14,
-                }}
-              >
-                Bugüne Git
-              </Text>
-            </TouchableOpacity>
-          </Animated.View>
-        )}
 
         {/* Selected Date Display */}
         {selectedDate && (
@@ -191,15 +165,7 @@ export default function HomeScreen() {
                 color: "#ff6e00",
               }}
             >
-              {(() => {
-                const dateObj = new Date(selectedDate);
-                const options: Intl.DateTimeFormatOptions = {
-                  day: "2-digit",
-                  month: "long",
-                  year: "numeric",
-                };
-                return dateObj.toLocaleDateString("tr-TR", options);
-              })()}
+              {dateFormatter(selectedDate)}
             </Text>
             <TouchableOpacity
               style={{
@@ -212,7 +178,7 @@ export default function HomeScreen() {
                 if (today === selectedDate) {
                   router.push("/createday");
                 } else {
-                  router.push("/[viewday]");
+                  router.push(`/viewday?id=${selectedDate}`);
                 }
               }}
             >
